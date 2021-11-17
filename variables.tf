@@ -28,6 +28,3 @@ variable "vnets" {
 variable "peers" {
   description = "Data values for virtual network peering"
 }
-variable "params" {
-  description = "Data values for params"
-}
