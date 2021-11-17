@@ -45,19 +45,6 @@ jobs:
             --name $BLOB_NAME \
             --connection-string $TFVAR_CONN_STRING
 
-      # Runs a single command using the runners shell
-      # - name: Authenticate Using SPN
-      #   env:
-      #     ARM_CLIENT_SECRET: '{{ secrets.AZ_CLIENT_SECRET }}'
-      #     ARM_CLIENT_ID: '{{ secrets.AZ_CLIENT_ID }}'
-      #     ARM_SUBSCRIPTION_ID: '{{ secrets.AZ_SUBSCRIPTION_ID }}'
-      #     ARM_TENANT_ID: '{{ secrets.AZ_TENANT_ID }}'
-      #   run: |
-      #     export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-      #     export ARM_CLIENT_ID=$ARM_CLIENT_ID
-      #     export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-      #     export ARM_TENANT_ID=$ARM_TENANT_ID
-
       
       #Is this providing the values without quotes?
       - name: Create Backend Config
@@ -70,11 +57,11 @@ jobs:
           cat >backend.tf <<EOL
           terraform {
             backend "azurerm" {
-              resource_group_name  = $BACKEND_RG_NAME
-              storage_account_name = $BACKEND_STG_ACCNT
-              container_name       = $BACKEND_STG_CONTAINER
-              subscription_id      = $BACKEND_SUB_ID
-              key = "mgmt.tfstate"
+              resource_group_name  = "$BACKEND_RG_NAME"
+              storage_account_name = "$BACKEND_STG_ACCNT"
+              container_name       = "$BACKEND_STG_CONTAINER"
+              subscription_id      = "$BACKEND_SUB_ID"
+              key = "dev.tfstate"
             }
           }
           EOL
@@ -100,7 +87,7 @@ jobs:
           export ARM_TENANT_ID="$ARM_TENANT_ID"
           terraform init
           terraform validate
-          terraform plan -out mgmt.tfplan -var-file $TFVAR_FILE
+          terraform plan -out dev.tfplan -var-file $TFVAR_FILE
       
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
