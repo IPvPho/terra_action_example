@@ -136,5 +136,5 @@ jobs:
           ls -la
           terraform init
           terraform validate
-          terraform apply mgmt.tfplan
+          terraform apply dev.tfplan
 
