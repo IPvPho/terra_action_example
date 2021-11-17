@@ -57,10 +57,10 @@ jobs:
           cat >backend.tf <<EOL
           terraform {
             backend "azurerm" {
-              resource_group_name  = $BACKEND_RG_NAME
-              storage_account_name = $BACKEND_STG_ACCNT
-              container_name       = $BACKEND_STG_CONTAINER
-              subscription_id      = $BACKEND_SUB_ID
+              resource_group_name  = "$BACKEND_RG_NAME"
+              storage_account_name = "$BACKEND_STG_ACCNT"
+              container_name       = "$BACKEND_STG_CONTAINER"
+              subscription_id      = "$BACKEND_SUB_ID"
               key = "dev.tfstate"
             }
           }
