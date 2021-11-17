@@ -98,7 +98,7 @@ jobs:
           path: |
             backend.tf
             main.tf
-            mgmt.tfplan
+            dev.tfplan
             modules
             providers.tf
             variables.tf
