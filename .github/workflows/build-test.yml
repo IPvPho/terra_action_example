@@ -80,7 +80,6 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
         run: |
-          echo $ARM_CLIENT_ID
           export ARM_CLIENT_SECRET="$ARM_CLIENT_SECRET"
           export ARM_CLIENT_ID="$ARM_CLIENT_ID"
           export ARM_SUBSCRIPTION_ID="$ARM_SUBSCRIPTION_ID"
@@ -100,7 +99,6 @@ jobs:
             main.tf
             dev.tfplan
             modules
-            providers.tf
             variables.tf
   
   deploy_terraform:
@@ -122,7 +120,7 @@ jobs:
           # Destination path
           path: .
             
-      - name: Run Terraform Validation
+      - name: Run Terraform Apply
         env:
           ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
           ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
@@ -133,7 +131,6 @@ jobs:
           export ARM_CLIENT_ID="$ARM_CLIENT_ID"
           export ARM_SUBSCRIPTION_ID="$ARM_SUBSCRIPTION_ID"
           export ARM_TENANT_ID="$ARM_TENANT_ID"
-          ls -la
           terraform init
           terraform validate
           terraform apply dev.tfplan
