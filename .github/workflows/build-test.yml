@@ -68,8 +68,7 @@ jobs:
 
           cat backend.tf 
           
-        
-         
+               
 
       # Runs a set of commands using the runners shell
       - name: Run Terraform Validation
